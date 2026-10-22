@@ -1,0 +1,8 @@
+# The python toolchain's pinned downloads (toolchains/lib/fetch.sh):
+# <dest> <arch> <sha256> <url> [<member>]
+# A version changes with both architectures' digests.
+
+# shellcheck v0.11.0, upstream's static build: Alpine's is a GHC binary,
+# which does not survive moving its ELF interpreter under the prefix.
+usr/bin/shellcheck amd64 b7af85e41cc99489dcc21d66c6d5f3685138f06d34651e6d34b42ec6d54fe6f6 https://github.com/koalaman/shellcheck/releases/download/v0.11.0/shellcheck-v0.11.0.linux.x86_64.tar.gz shellcheck-v0.11.0/shellcheck
+usr/bin/shellcheck arm64 68a8133197a50beb8803f8d42f9908d1af1c5540d4bb05fdfca8c1fa47decefc https://github.com/koalaman/shellcheck/releases/download/v0.11.0/shellcheck-v0.11.0.linux.aarch64.tar.gz shellcheck-v0.11.0/shellcheck

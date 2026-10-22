@@ -1,0 +1,49 @@
+# The go toolchain's pinned downloads (toolchains/lib/fetch.sh):
+# <dest> <arch> <sha256> <url> [<member>]
+# A version changes with both architectures' digests.
+
+# golangci-lint v2.14.0, the version giantswarm/architect lints with in CI
+bin/golangci-lint amd64 ab90aeb7b066f92a33415b638a50fe5344bbb75a0d32ad30cc248d88f81032ab https://github.com/golangci/golangci-lint/releases/download/v2.14.0/golangci-lint-2.14.0-linux-amd64.tar.gz golangci-lint-2.14.0-linux-amd64/golangci-lint
+bin/golangci-lint arm64 ee7ec5f3453d15ddf106fae5a4d6c71737712348a979d1fe9cd52ec7ea299bae https://github.com/golangci/golangci-lint/releases/download/v2.14.0/golangci-lint-2.14.0-linux-arm64.tar.gz golangci-lint-2.14.0-linux-arm64/golangci-lint
+
+# nancy v2.1.1
+bin/nancy amd64 734e73e47b0ffc37b7c4ce399c06454680d17bd38347aca08e968a163a05d581 https://github.com/sonatype-nexus-community/nancy/releases/download/v2.1.1/nancy-v2.1.1-linux-amd64
+bin/nancy arm64 ee623c9d67b4c727512bcbccd33e415e1fef88a68e56e17259882ea81ce4aa32 https://github.com/sonatype-nexus-community/nancy/releases/download/v2.1.1/nancy-v2.1.1-linux-arm64
+
+# gitsemver v3.0.7
+bin/gitsemver amd64 9334c9ee48c07598c23a9b661d28039392815fdf3fa3f8de4f327f7d5ec9bf22 https://github.com/giantswarm/gitsemver/releases/download/v3.0.7/gitsemver-linux-amd64
+bin/gitsemver arm64 9931d6f7bb9026722a2e15d50204e71f90763bfd08fc5865b3405eea5b334056 https://github.com/giantswarm/gitsemver/releases/download/v3.0.7/gitsemver-linux-arm64
+
+# architect v8.6.18
+bin/architect amd64 8c1dd40dbaa55336efe93d02bdcdf87bbfdec35c38513384ca523bacad2dc94c https://github.com/giantswarm/architect/releases/download/v8.6.18/architect-linux-amd64
+bin/architect arm64 84e87897b18f62606f5563fc69a2e35712a82ae2a6acca31d224b213be6b99fb https://github.com/giantswarm/architect/releases/download/v8.6.18/architect-linux-arm64
+
+# helm v3.22.1
+bin/helm amd64 896cf63684a42a723d61c980369d6e588330927deb13676ca0d85006dd6da0ea https://get.helm.sh/helm-v3.22.1-linux-amd64.tar.gz linux-amd64/helm
+bin/helm arm64 4c29e286b279d170fa048ddfc3e4e83dcd069ca9c52102766ba672d7149e694d https://get.helm.sh/helm-v3.22.1-linux-arm64.tar.gz linux-arm64/helm
+
+# helm-docs v1.14.2
+bin/helm-docs amd64 a8cf72ada34fad93285ba2a452b38bdc5bd52cc9a571236244ec31022928d6cc https://github.com/norwoodj/helm-docs/releases/download/v1.14.2/helm-docs_1.14.2_Linux_x86_64.tar.gz helm-docs
+bin/helm-docs arm64 c3787212332386dcd122debef7848feb165aa701467ae3e3442df7638f3ac4e4 https://github.com/norwoodj/helm-docs/releases/download/v1.14.2/helm-docs_1.14.2_Linux_arm64.tar.gz helm-docs
+
+# yq v4.54.1
+bin/yq amd64 8e34fc298390875de416e6a4afcb8cabeceb25d9aa8506c1a2f9353cf702ea5f https://github.com/mikefarah/yq/releases/download/v4.54.1/yq_linux_amd64
+bin/yq arm64 189088da0c6429ec5178dfaab1a114805f6cab0b61b165ab236efedf1d57a71b https://github.com/mikefarah/yq/releases/download/v4.54.1/yq_linux_arm64
+
+# vendir v0.46.3
+bin/vendir amd64 5af8823ecc67b3ce2359bb0b70e72a5dbd765135722ca0ff42c16bc4d7409847 https://github.com/carvel-dev/vendir/releases/download/v0.46.3/vendir-linux-amd64
+bin/vendir arm64 821a9da837a017270743597a2e9b796d2d256385ad85450d6c5d89f05dd5aac9 https://github.com/carvel-dev/vendir/releases/download/v0.46.3/vendir-linux-arm64
+
+# schemalint v2.6.3
+bin/schemalint amd64 7fa193de06fb4ed8dccfcfdf196c3806e118eea2ffe0d04bf97571d15eb7d4fe https://github.com/giantswarm/schemalint/releases/download/v2.6.3/schemalint-linux-amd64
+bin/schemalint arm64 a5abea456ceb65234c3bbbfb27bdcab9bfba06b54ad68e1e84e47cef914c7440 https://github.com/giantswarm/schemalint/releases/download/v2.6.3/schemalint-linux-arm64
+
+# helm-values-schema-json v2.6.0, the binary behind the `helm schema` plugin
+bin/helm-values-schema-json amd64 c3447c1be91b987678e70996451b6cf2169b9f44fea8fe670dc0f340281f11e8 https://github.com/losisin/helm-values-schema-json/releases/download/v2.6.0/helm-values-schema-json_2.6.0_linux_amd64.tgz schema
+bin/helm-values-schema-json arm64 baf7c867fb4cb6903f49e5698b74a850912b6af9c84108668351e312b59e0e4f https://github.com/losisin/helm-values-schema-json/releases/download/v2.6.0/helm-values-schema-json_2.6.0_linux_arm64.tgz schema
+
+# ct (chart-testing) v3.15.0, run by bin/ct with its configuration
+libexec/ct amd64 467561730f25fe09d5e6cd09a3e1f6aa759871c657a57602947c716d9be2c583 https://github.com/helm/chart-testing/releases/download/v3.15.0/chart-testing_3.15.0_linux_amd64.tar.gz ct
+etc/ct amd64 467561730f25fe09d5e6cd09a3e1f6aa759871c657a57602947c716d9be2c583 https://github.com/helm/chart-testing/releases/download/v3.15.0/chart-testing_3.15.0_linux_amd64.tar.gz etc/
+libexec/ct arm64 732d3187e8d7f9c72ab6775f4ebc374562e384e50f94fc0b2844c002e8bad5e5 https://github.com/helm/chart-testing/releases/download/v3.15.0/chart-testing_3.15.0_linux_arm64.tar.gz ct
+etc/ct arm64 732d3187e8d7f9c72ab6775f4ebc374562e384e50f94fc0b2844c002e8bad5e5 https://github.com/helm/chart-testing/releases/download/v3.15.0/chart-testing_3.15.0_linux_arm64.tar.gz etc/

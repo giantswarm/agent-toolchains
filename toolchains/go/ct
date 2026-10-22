@@ -1,0 +1,10 @@
+#!/bin/sh
+# ct reads chart_schema.yaml and lintconf.yaml from CT_CONFIG_DIR, else from
+# ., .ct, ~/.ct, /usr/local/etc/ct or /etc/ct, which no Harness image holds:
+# the toolchain's own are the default when none of the first three has them.
+if [ -z "${CT_CONFIG_DIR:-}" ] && [ ! -e chart_schema.yaml ] \
+  && [ ! -e .ct/chart_schema.yaml ] && [ ! -e "${HOME:-/nonexistent}/.ct/chart_schema.yaml" ]; then
+  CT_CONFIG_DIR=/opt/kagent/tools/go/etc/ct
+  export CT_CONFIG_DIR
+fi
+exec /opt/kagent/tools/go/libexec/ct "$@"

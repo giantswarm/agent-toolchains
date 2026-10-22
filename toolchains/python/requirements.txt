@@ -1,0 +1,4 @@
+# What Alpine does not package, installed into the toolchain's prefix
+# without dependencies: each one's dependencies are Alpine packages.
+yamale==6.1.0 \
+    --hash=sha256:7e109c9d83e3a7e42703516cb2b70b9c7aa5b7a738019c4a6c202b6b0b9096c5

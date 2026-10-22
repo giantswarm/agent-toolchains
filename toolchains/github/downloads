@@ -1,0 +1,7 @@
+# The github toolchain's pinned downloads (toolchains/lib/fetch.sh):
+# <dest> <arch> <sha256> <url> [<member>]
+# A version changes with both architectures' digests.
+
+# gh v2.103.0
+bin/gh amd64 fdd768eb70f6409f80fcfa9f3a1c0adf0fc98d827ab3ce0bed2ac22762c5d786 https://github.com/cli/cli/releases/download/v2.103.0/gh_2.103.0_linux_amd64.tar.gz gh_2.103.0_linux_amd64/bin/gh
+bin/gh arm64 7f322df34e624d14f5ec0c4acb121fd6dfa14392fdbbd1066aa8e0a05ac3721e https://github.com/cli/cli/releases/download/v2.103.0/gh_2.103.0_linux_arm64.tar.gz gh_2.103.0_linux_arm64/bin/gh
