@@ -24,6 +24,7 @@ FROM scratch
 COPY --from=build /opt/kagent/tools/node/ /
 LABEL io.giantswarm.toolchain.name="node" \
       io.giantswarm.toolchain.harnesses="kagent,claude,codex,omp" \
+      io.giantswarm.toolchain.egress="https://registry.npmjs.org" \
       io.giantswarm.toolchain.tool.node="node --version && node -e 'require(\"crypto\").createHash(\"sha256\"); new Intl.DateTimeFormat()'" \
       io.giantswarm.toolchain.tool.npm="npm --version" \
       io.giantswarm.toolchain.tool.npx="npx --version" \

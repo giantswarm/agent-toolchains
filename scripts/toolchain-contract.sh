@@ -7,7 +7,8 @@ set -euo pipefail
 # the built image:
 #
 #   - it declares its name, the Harnesses it serves and a version command per
-#     tool (io.giantswarm.toolchain.* labels, see README.md);
+#     tool (io.giantswarm.toolchain.* labels, see README.md), and the egress
+#     origins it declares, if any, are http(s)://host[:port];
 #   - it sets no user and no entrypoint a Harness would see;
 #   - every file is readable, every directory searchable and every bin/ tool
 #     executable by uid 65532;
@@ -71,6 +72,14 @@ mapfile -t harnesses < <(label "${labels}.harnesses" | tr ',' '\n' | tr -d ' ' |
 if [[ ${#harnesses[@]} -eq 0 ]]; then
   fail "harnesses: label ${labels}.harnesses declares none"
 fi
+mapfile -t origins < <(label "${labels}.egress" | tr ',' '\n' | tr -d ' ' | sed '/^$/d')
+for origin in "${origins[@]}"; do
+  if [[ "$origin" =~ ^https?://[a-z0-9*]([a-z0-9.-]*[a-z0-9])?(:[0-9]+)?$ ]]; then
+    pass "egress: ${origin}"
+  else
+    fail "egress: label ${labels}.egress lists \"${origin}\", want an origin http(s)://host[:port]"
+  fi
+done
 # shellcheck disable=SC2016 # a Go template, not a shell expansion
 mapfile -t tools < <(inspect '{{range $k, $v := .Config.Labels}}{{$k}}{{"\n"}}{{end}}' | sed -n "s/^${labels}\.tool\.//p")
 if [[ ${#tools[@]} -eq 0 ]]; then
