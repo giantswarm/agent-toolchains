@@ -1,0 +1,53 @@
+version: 2.1
+
+orbs:
+  architect: giantswarm/architect@10.14.13
+
+jobs:
+  toolchain-contract:
+    parameters:
+      toolchain:
+        type: string
+    machine:
+      image: ubuntu-2404:current
+    resource_class: medium
+    steps:
+      - checkout
+      - run:
+          name: Toolchain contract of << parameters.toolchain >>
+          command: scripts/check-toolchains.sh << parameters.toolchain >>
+
+workflows:
+  build:
+    jobs:
+    - toolchain-contract:
+        name: contract-jq
+        toolchain: jq
+        filters:
+          tags:
+            only: /^jq\/v.*/
+          branches:
+            ignore: /.*/
+
+    - architect/push-to-registries:
+        context: architect
+        multiarch: true
+        name: push-jq
+        image: giantswarm/agent-toolchains/jq
+        dockerfile: ./toolchains/jq/Dockerfile
+        build-context: ./toolchains/jq
+        platforms: "linux/amd64,linux/arm64"
+        resource_class: medium
+        git-tag-prefix: "jq"
+        registries-data: "public gsoci.azurecr.io ACR_GSOCI_USERNAME ACR_GSOCI_PASSWORD true"
+        annotations: |
+          io.giantswarm.toolchain.name=jq
+          io.giantswarm.toolchain.repository=https://github.com/giantswarm/agent-toolchains
+          io.giantswarm.toolchain.license=Apache-2.0
+        requires:
+          - contract-jq
+        filters:
+          tags:
+            only: /^jq\/v.*/
+          branches:
+            ignore: /.*/

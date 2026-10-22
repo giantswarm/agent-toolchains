@@ -1,0 +1,34 @@
+# yamllint disable rule:truthy
+# The toolchain contract check, required on every pull request (a person's,
+# the toolchain-manager's and Renovate's), so it runs with no path filter.
+# It first proves itself on the fixture toolchains, then builds every
+# toolchain under toolchains/ and checks it beside each Harness image it
+# declares (harnesses). The images are built locally and never pushed:
+# CircleCI publishes, and runs the same check before a tag moves `latest`
+# (.circleci/generate-config.sh).
+name: Toolchain contract
+
+on:
+  pull_request: {}
+  merge_group: {}
+  push:
+    branches:
+      - main
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  contract:
+    name: Toolchain contract
+    runs-on: ubuntu-26.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+
+      - name: The check fails each broken fixture and passes the good one
+        run: scripts/toolchain-contract-fixtures.sh
+
+      - name: Every toolchain keeps the contract
+        run: scripts/check-toolchains.sh
