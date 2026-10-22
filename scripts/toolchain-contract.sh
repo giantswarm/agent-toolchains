@@ -94,6 +94,8 @@ else
 fi
 
 # Each tool beside each declared Harness image.
+# Docker before image mounts were stable warns on each one, ahead of the output.
+mount_warning='^WARNING: Image mount is an experimental feature'
 harness_image() {
   awk -v want="$1" '$1 == want && NF == 2 { print $2 }' "$harnesses_file"
 }
@@ -110,7 +112,7 @@ for harness in "${harnesses[@]}"; do
     if out=$(docker run --rm --network none --user "${uid}:${uid}" \
       --mount "type=image,source=${image},target=${prefix}" \
       -e "PATH=${path:-/usr/local/bin:/usr/bin:/bin}:${prefix}/bin" -e HOME=/tmp \
-      --entrypoint /bin/sh "$ref" -c "$cmd" 2>&1); then
+      --entrypoint /bin/sh "$ref" -c "$cmd" 2>&1 | sed "/${mount_warning}/d"); then
       pass "${harness}: ${tool}: $(echo "$out" | head -1)"
     else
       fail "${harness}: ${tool} (${cmd}): $(echo "$out" | head -3 | tr '\n' ' ')"
