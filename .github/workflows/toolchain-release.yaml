@@ -5,8 +5,9 @@
 # line. The file is not called auto-release.yaml: devctl's alignment deletes
 # that name as a leftover of its own release flow.
 #
-# On every push to main, each toolchain whose directory changed since its
-# latest <name>/v* tag gets its next tag and a GitHub Release. The merged
+# On every push to main, each toolchain whose directory, or the shared build
+# scripts in toolchains/lib/, changed since its latest <name>/v* tag gets its
+# next tag and a GitHub Release. The merged
 # pull request's squash subject sets the bump: a breaking change (`type!:` or
 # a `BREAKING CHANGE` footer) the major, a `feat` the minor, anything else the
 # patch; a toolchain's first tag is v0.1.0. Diffing against the toolchain's
@@ -64,7 +65,7 @@ jobs:
 
             if [ -z "$latest" ]; then
               next="${name}/v0.1.0"
-            elif git diff --quiet "$latest" HEAD -- "$dir"; then
+            elif git diff --quiet "$latest" HEAD -- "$dir" toolchains/lib; then
               echo "${dir}: unchanged since ${latest}"
               continue
             else

@@ -6,7 +6,8 @@ set -euo pipefail
 #
 # A toolchains/<name>/ directory is image agent-toolchains/<name>, tagged
 # <name>/vX.Y.Z (.github/workflows/toolchain-release.yaml), published to
-# gsoci.azurecr.io only.
+# gsoci.azurecr.io only. Every toolchain builds with toolchains/ as its
+# context, so it can use the shared build scripts in toolchains/lib/.
 #
 # Branch builds: a dev image (amd64) of each changed toolchain, for a proof
 #                before merge; it never moves `latest`.
@@ -65,7 +66,7 @@ emit_branch_job() {
         name: push-${name}
         image: giantswarm/agent-toolchains/${name}
         dockerfile: ./toolchains/${name}/Dockerfile
-        build-context: ./toolchains/${name}
+        build-context: ./toolchains
         platforms: "linux/amd64"
         resource_class: medium
         persist-build-version: false
@@ -92,7 +93,7 @@ emit_tag_job() {
         name: push-${name}
         image: giantswarm/agent-toolchains/${name}
         dockerfile: ./toolchains/${name}/Dockerfile
-        build-context: ./toolchains/${name}
+        build-context: ./toolchains
         platforms: "linux/amd64,linux/arm64"
         resource_class: medium
         git-tag-prefix: "${name}"
@@ -140,7 +141,8 @@ if [[ -n "${CIRCLE_TAG:-}" ]]; then
   exit 0
 fi
 
-# Branch build: only the changed toolchains.
+# Branch build: only the changed toolchains, every one when the shared build
+# scripts changed.
 CHANGED=()
 if git rev-parse --verify origin/main >/dev/null 2>&1; then
   mapfile -t CHANGED < <(
@@ -148,6 +150,9 @@ if git rev-parse --verify origin/main >/dev/null 2>&1; then
       | sed -n 's|^toolchains/\([^/]*\)/.*|\1|p' \
       | sort -u
   )
+fi
+if printf '%s\n' "${CHANGED[@]}" | grep -qx lib; then
+  mapfile -t CHANGED < <(find toolchains -mindepth 2 -maxdepth 2 -name Dockerfile -printf '%h\n' | xargs -r -n1 basename | sort)
 fi
 
 BUILD=()

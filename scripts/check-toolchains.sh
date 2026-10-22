@@ -24,7 +24,7 @@ for name in "${names[@]}"; do
   dir="${root}/toolchains/${name}"
   image="toolchain-contract/${name}:check"
   echo "::group::toolchain ${name}"
-  docker build -t "$image" "$dir"
+  docker build -t "$image" -f "${dir}/Dockerfile" "${root}/toolchains"
   declared=$(docker image inspect -f '{{index .Config.Labels "io.giantswarm.toolchain.name"}}' "$image")
   if [[ "$declared" != "$name" ]]; then
     echo "FAIL  toolchains/${name}: io.giantswarm.toolchain.name is \"${declared}\", want \"${name}\""
