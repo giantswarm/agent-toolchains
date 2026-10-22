@@ -26,6 +26,7 @@ FROM scratch AS good
 COPY --from=build /opt/kagent/tools/jq/ /
 LABEL io.giantswarm.toolchain.name="jq" \
       io.giantswarm.toolchain.harnesses="kagent,claude,codex,omp" \
+      io.giantswarm.toolchain.egress="https://example.com,https://registry.example.com:8443" \
       io.giantswarm.toolchain.tool.jq="jq --version"
 
 FROM scratch AS wrong-prefix
@@ -48,6 +49,9 @@ LABEL io.giantswarm.toolchain.name="jq" \
 
 FROM good AS user
 USER 65532:65532
+
+FROM good AS egress
+LABEL io.giantswarm.toolchain.egress="https://example.com/path"
 
 FROM good AS entrypoint
 ENTRYPOINT ["/opt/kagent/tools/jq/bin/jq"]

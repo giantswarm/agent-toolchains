@@ -60,20 +60,21 @@ The labels declare the toolchain:
 |---|---|
 | `io.giantswarm.toolchain.name` | The toolchain's name, its directory's name: the mount directory is `/opt/kagent/tools/<name>` |
 | `io.giantswarm.toolchain.harnesses` | The Harnesses it serves, comma-separated names from `harnesses` |
+| `io.giantswarm.toolchain.egress` | Optional: the origins its tools reach, comma-separated `https://host[:port]` (`go`: the module proxy and checksum database). A Session that mounts the toolchain reaches them beside its agent's own; one without it does not |
 | `io.giantswarm.toolchain.tool.<tool>` | One per tool: its version command, run by `/bin/sh -c` |
 
 ## The toolchain contract check
 
 `scripts/toolchain-contract.sh <image>` asserts against the built image that:
 
-- it declares its name, its Harnesses and a version command per tool;
+- it declares its name, its Harnesses and a version command per tool, and its egress origins, when it declares any, are `http(s)://host[:port]` origins;
 - it sets no user and no entrypoint a Harness would see;
 - every file is readable, every directory searchable and every `bin/` tool executable by uid 65532;
 - it was built at its mount directory: no file names another `/opt/kagent/tools/<other>` prefix and no symlink leaves the prefix;
 - every dynamically linked file finds each library it needs under the prefix;
 - each tool answers its version command as uid 65532, without a network, with the image mounted read-only beside every Harness image it declares.
 
-It is the required `Toolchain contract` check on every pull request, which first proves itself on the fixture toolchains (`scripts/toolchain-contract-fixtures.sh`): `good` passes, and `wrong-prefix`, `missing-lib`, `unreadable` (apk's root-only lock kept), `user` and `entrypoint` each fail for their own reason. It runs again in the CircleCI tag pipeline, where the push of a release, and so its `latest` tag, requires it.
+It is the required `Toolchain contract` check on every pull request, which first proves itself on the fixture toolchains (`scripts/toolchain-contract-fixtures.sh`): `good` passes, and `wrong-prefix`, `missing-lib`, `unreadable` (apk's root-only lock kept), `user`, `entrypoint` and `egress` (an origin with a path) each fail for their own reason. It runs again in the CircleCI tag pipeline, where the push of a release, and so its `latest` tag, requires it.
 
 Run it locally with `make check` (every toolchain) or `make check-fixtures`.
 
