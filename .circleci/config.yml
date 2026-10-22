@@ -1,0 +1,25 @@
+version: 2.1
+setup: true
+
+orbs:
+  continuation: circleci/continuation@2.0.1
+
+jobs:
+  generate-config:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - checkout
+      - run:
+          name: Generate pipeline config
+          command: .circleci/generate-config.sh > /tmp/generated-config.yml
+      - continuation/continue:
+          configuration_path: /tmp/generated-config.yml
+
+workflows:
+  setup:
+    jobs:
+      - generate-config:
+          filters:
+            tags:
+              only: /.*/

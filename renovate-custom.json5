@@ -1,0 +1,23 @@
+// Repo-specific Renovate rules, added after renovate.json5's extends.
+{
+  customManagers: [
+    {
+      // The Harness images the toolchain contract check runs beside:
+      // `<harness> <image>:<tag>@<digest>` lines.
+      customType: 'regex',
+      managerFilePatterns: ['/^harnesses$/'],
+      matchStrings: [
+        '(?<depName>gsoci\\.azurecr\\.io/[^:\\s]+):(?<currentValue>[^@\\s]+)@(?<currentDigest>sha256:[a-f0-9]+)',
+      ],
+      datasourceTemplate: 'docker',
+    },
+  ],
+  packageRules: [
+    {
+      // The kagent line releases its Harness images together: one pull request,
+      // which the toolchain contract check runs against the new images.
+      matchFileNames: ['harnesses'],
+      groupName: 'kagent Harness images',
+    },
+  ],
+}
