@@ -67,10 +67,11 @@ else
 fi
 
 # The declarations.
-mapfile -t harnesses < <(label "${labels}.harnesses" | tr ', ' '\n\n' | sed '/^$/d')
+mapfile -t harnesses < <(label "${labels}.harnesses" | tr ',' '\n' | tr -d ' ' | sed '/^$/d')
 if [[ ${#harnesses[@]} -eq 0 ]]; then
   fail "harnesses: label ${labels}.harnesses declares none"
 fi
+# shellcheck disable=SC2016 # a Go template, not a shell expansion
 mapfile -t tools < <(inspect '{{range $k, $v := .Config.Labels}}{{$k}}{{"\n"}}{{end}}' | sed -n "s/^${labels}\.tool\.//p")
 if [[ ${#tools[@]} -eq 0 ]]; then
   fail "tools: no ${labels}.tool.<tool> label declares a version command"

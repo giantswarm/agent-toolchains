@@ -62,7 +62,6 @@ emit_branch_job() {
   cat <<EOF
     - architect/push-to-registries:
         context: architect
-        multiarch: true
         name: push-${name}
         image: giantswarm/agent-toolchains/${name}
         dockerfile: ./toolchains/${name}/Dockerfile
@@ -90,7 +89,6 @@ emit_tag_job() {
 
     - architect/push-to-registries:
         context: architect
-        multiarch: true
         name: push-${name}
         image: giantswarm/agent-toolchains/${name}
         dockerfile: ./toolchains/${name}/Dockerfile
