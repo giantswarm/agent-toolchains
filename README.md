@@ -73,7 +73,7 @@ The labels declare the toolchain:
 - every dynamically linked file finds each library it needs under the prefix;
 - each tool answers its version command as uid 65532, without a network, with the image mounted read-only beside every Harness image it declares.
 
-It is the required `Toolchain contract` check on every pull request, which first proves itself on the fixture toolchains (`scripts/toolchain-contract-fixtures.sh`): `good` passes, and `wrong-prefix`, `missing-lib`, `user` and `entrypoint` each fail for their own reason. It runs again in the CircleCI tag pipeline, where the push of a release, and so its `latest` tag, requires it.
+It is the required `Toolchain contract` check on every pull request, which first proves itself on the fixture toolchains (`scripts/toolchain-contract-fixtures.sh`): `good` passes, and `wrong-prefix`, `missing-lib`, `unreadable` (apk's root-only lock kept), `user` and `entrypoint` each fail for their own reason. It runs again in the CircleCI tag pipeline, where the push of a release, and so its `latest` tag, requires it.
 
 Run it locally with `make check` (every toolchain) or `make check-fixtures`.
 
