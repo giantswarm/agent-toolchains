@@ -1,0 +1,7 @@
+# The gitlab toolchain's pinned downloads (toolchains/lib/fetch.sh):
+# <dest> <arch> <sha256> <url> [<member>]
+# A version changes with both architectures' digests.
+
+# glab v1.124.0
+bin/glab amd64 63df684842b0697e418649dd64374d37ac1da0fbcdcb422d6a5557222f8bb40f https://gitlab.com/gitlab-org/cli/-/releases/v1.124.0/downloads/glab_1.124.0_linux_amd64.tar.gz bin/glab
+bin/glab arm64 0716395a0efeb991fc844b33fe55310645afcbd9b9746e50c725e9d1cd1b8d16 https://gitlab.com/gitlab-org/cli/-/releases/v1.124.0/downloads/glab_1.124.0_linux_arm64.tar.gz bin/glab

@@ -1,0 +1,11 @@
+#!/bin/sh
+# Alpine's Node uses the system ICU, whose data it looks for under
+# /usr/share/icu, which no Harness image holds: Intl needs the toolchain's.
+# Exported, so every Node a run starts (process.execPath) finds it too.
+if [ -z "${NODE_ICU_DATA:-}" ]; then
+  for dir in /opt/kagent/tools/node/usr/share/icu/*/; do
+    NODE_ICU_DATA="${dir%/}"
+  done
+  export NODE_ICU_DATA
+fi
+exec /opt/kagent/tools/node/usr/bin/node "$@"
