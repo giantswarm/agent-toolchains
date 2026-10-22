@@ -13,6 +13,11 @@ FROM ${ALPINE} AS build-elsewhere
 COPY install-jq.sh /
 RUN /install-jq.sh /opt/kagent/tools/elsewhere
 
+# The same toolchain with apk's lock kept: `apk add --root` leaves it
+# readable by root only.
+FROM build AS build-unreadable
+RUN install -m 0600 /dev/null /opt/kagent/tools/jq/lib/apk/db/lock
+
 # The same toolchain without a library jq needs.
 FROM build AS build-missing-lib
 RUN rm /opt/kagent/tools/jq/usr/lib/libonig.so.*
@@ -31,6 +36,12 @@ LABEL io.giantswarm.toolchain.name="jq" \
 
 FROM scratch AS missing-lib
 COPY --from=build-missing-lib /opt/kagent/tools/jq/ /
+LABEL io.giantswarm.toolchain.name="jq" \
+      io.giantswarm.toolchain.harnesses="kagent,claude,codex,omp" \
+      io.giantswarm.toolchain.tool.jq="jq --version"
+
+FROM scratch AS unreadable
+COPY --from=build-unreadable /opt/kagent/tools/jq/ /
 LABEL io.giantswarm.toolchain.name="jq" \
       io.giantswarm.toolchain.harnesses="kagent,claude,codex,omp" \
       io.giantswarm.toolchain.tool.jq="jq --version"
