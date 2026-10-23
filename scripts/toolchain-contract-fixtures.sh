@@ -15,8 +15,10 @@ cases=(
   "good|"
   "wrong-prefix|FAIL  built at another prefix: "
   "missing-lib|FAIL  library not under the prefix: "
+  "unreadable|FAIL  uid 65532 cannot read "
   "user|FAIL  user: the image sets "
   "entrypoint|FAIL  entrypoint: the image sets "
+  "egress|FAIL  egress: label io.giantswarm.toolchain.egress lists "
 )
 
 failed=0

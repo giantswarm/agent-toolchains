@@ -45,6 +45,7 @@ FROM scratch
 COPY --from=build /opt/kagent/tools/go/ /
 LABEL io.giantswarm.toolchain.name="go" \
       io.giantswarm.toolchain.harnesses="kagent,claude,codex,omp" \
+      io.giantswarm.toolchain.egress="https://proxy.golang.org,https://sum.golang.org" \
       io.giantswarm.toolchain.tool.go="go version && go env GOROOT" \
       io.giantswarm.toolchain.tool.make="make --version" \
       io.giantswarm.toolchain.tool.gofmt="echo 'package p' | gofmt" \
