@@ -1,0 +1,25 @@
+#!/bin/sh
+# The node toolchain's Chromium, the executablePath of every launch the
+# playwright-browser skill makes (bin/playwright-cli, a repository's
+# `playwright test` through the skill's override configuration).
+#
+# A page must not reach muster's in-cluster host: the egress gateway gives
+# every client in the actor the person's credential there. The rule comes
+# after Playwright's arguments, since Chromium keeps the last of a repeated
+# switch; the trailing * covers the trailing-dot form. It holds while Chromium
+# resolves names itself: not through an explicit proxy, not for another
+# executable, not for a request Node sends (route.fetch(), request,
+# page.request).
+#
+# Chromium's fonts and ICU data live under the prefix, which no Harness image
+# holds at the system paths.
+prefix=/opt/kagent/tools/node
+export FONTCONFIG_FILE="${prefix}/etc/fonts/fonts.conf"
+if [ -z "${ICU_DATA:-}" ]; then
+  for dir in "${prefix}"/usr/share/icu/*/; do
+    ICU_DATA="${dir%/}"
+  done
+  export ICU_DATA
+fi
+exec "${prefix}/usr/lib/chromium/chromium" "$@" \
+  '--host-resolver-rules=MAP muster.*.svc.cluster.local* ^NOTFOUND'

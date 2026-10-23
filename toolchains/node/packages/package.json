@@ -1,0 +1,8 @@
+{
+  "name": "node-toolchain-packages",
+  "private": true,
+  "description": "The node toolchain's pinned npm packages (toolchains/node/Dockerfile): the Playwright CLI; Renovate moves them",
+  "dependencies": {
+    "@playwright/cli": "0.1.22"
+  }
+}
