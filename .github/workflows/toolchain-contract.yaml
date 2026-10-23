@@ -3,7 +3,8 @@
 # the toolchain-manager's and Renovate's), so it runs with no path filter.
 # It first proves itself on the fixture toolchains, then builds every
 # toolchain under toolchains/ and checks it beside each Harness image it
-# declares (harnesses). The images are built locally and never pushed:
+# declares (harnesses), on amd64 and on arm64, each natively: a toolchain is
+# published for both. The images are built locally and never pushed:
 # CircleCI publishes, and runs the same check before a tag moves `latest`
 # (check-image in .circleci/custom.yml).
 name: Toolchain contract
@@ -20,9 +21,9 @@ permissions:
   contents: read
 
 jobs:
-  contract:
-    name: Toolchain contract
-    runs-on: ubuntu-26.04
+  contract-arm64:
+    name: Toolchain contract (arm64)
+    runs-on: ubuntu-24.04-arm
     steps:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
@@ -32,3 +33,25 @@ jobs:
 
       - name: Every toolchain keeps the contract
         run: scripts/check-toolchains.sh
+
+  # The required check: amd64, and it fails when arm64 did.
+  contract:
+    name: Toolchain contract
+    runs-on: ubuntu-26.04
+    needs: contract-arm64
+    if: ${{ !cancelled() }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1  # v7.0.1
+
+      - name: The check fails each broken fixture and passes the good one
+        run: scripts/toolchain-contract-fixtures.sh
+
+      - name: Every toolchain keeps the contract
+        run: scripts/check-toolchains.sh
+
+      - name: arm64 keeps it too
+        env:
+          ARM64: ${{ needs.contract-arm64.result }}
+        run: |
+          [ "$ARM64" = success ] || { echo "Toolchain contract (arm64): ${ARM64}"; exit 1; }

@@ -21,7 +21,7 @@ A **toolchain** is a named set of tools (`go`, `node`) published as its own OCI 
 | Toolchain | Tools |
 |---|---|
 | `go` | Go (with `gofmt`, `go vet`), make, golangci-lint (the version giantswarm/architect lints with), goimports, nancy, gitsemver, architect, helm, helm-docs, yq, vendir, schemalint, helm-values-schema-json, ct: what a repository made from the giantswarm templates runs locally. No kubectl (agents reach clusters through mcp-kubernetes), no kind (an actor has no container runtime), no devctl (served by its MCP server) |
-| `node` | Node, npm, npx, corepack |
+| `node` | Node, npm, npx, corepack, and a headless browser: Alpine's Chromium (`chromium`) and the Playwright CLI (`playwright-cli`). `bin/playwright-cli` configures the CLI (the toolchain's Chromium, headless, Chromium's sandbox off, service workers blocked; its environment outranks a repository's `.playwright/cli.config.json`), and `bin/chromium` refuses every name of muster's in-cluster host, a defence in depth while Chromium resolves names itself. The `playwright-browser` skill of giantswarm/agent-skills teaches an agent to use it |
 | `python` | python3, pre-commit, pytest, yamllint, yamale, shellcheck: the templates' pre-commit hooks, the app ATS tests and ct's lint; mounted beside `go` or `node` |
 | `github` | `gh` |
 | `gitlab` | `glab` |
@@ -52,7 +52,7 @@ LABEL io.giantswarm.toolchain.name="jq" \
 - **A release binary**: a line in `<name>/downloads` (`<dest> <arch> <sha256> <url> [<member>]`), fetched and verified by `lib/fetch.sh` (`github`, `gitlab`, most of `go`).
 - **Alpine packages**: `lib/apk-prefix.sh install` installs them for the target architecture under the prefix, and `lib/apk-prefix.sh finish` makes the prefix self-contained: every executable gets the prefix's own musl loader and library path, shebangs name the prefix's interpreters, and `bin/` links the named tools only (`python`, `node`). A binary that does not survive a moved ELF interpreter (a GHC binary such as Alpine's shellcheck) is a pinned download instead.
 
-Nothing of the target architecture runs while building, so the build stage runs on the build platform (`FROM --platform=$BUILDPLATFORM`) and an arm64 image needs no emulation. A tool that reads data from a fixed system path gets a `bin/` wrapper pointing it at the prefix (`go/ct`, `node/node`): a toolchain sets no environment.
+Nothing of the target architecture runs while building, so the build stage runs on the build platform (`FROM --platform=$BUILDPLATFORM`) and an arm64 image needs no emulation. A tool that reads data from a fixed system path gets a `bin/` wrapper pointing it at the prefix (`go/ct`, `node/node`, `node/chromium`): a toolchain sets no environment, a wrapper sets only its own tool's (`node/playwright-cli`).
 
 The labels declare the toolchain:
 
@@ -74,9 +74,11 @@ The labels declare the toolchain:
 - every dynamically linked file finds each library it needs under the prefix;
 - each tool answers its version command as uid 65532, without a network, with the image mounted read-only beside every Harness image it declares.
 
-It is the required `Toolchain contract` check on every pull request, which first proves itself on the fixture toolchains (`scripts/toolchain-contract-fixtures.sh`): `good` passes, and `wrong-prefix`, `missing-lib`, `unreadable` (apk's root-only lock kept), `user`, `entrypoint` and `egress` (an origin with a path) each fail for their own reason. It runs again in the CircleCI tag pipeline, where the push of a release, and so its `latest` tag, requires it.
+It is the required `Toolchain contract` check on every pull request, which first proves itself on the fixture toolchains (`scripts/toolchain-contract-fixtures.sh`): `good` passes, and `wrong-prefix`, `missing-lib`, `unreadable` (apk's root-only lock kept), `user`, `entrypoint` and `egress` (an origin with a path) each fail for their own reason. It runs natively on amd64 and on arm64, the required check failing when either does. It runs again in the CircleCI tag pipeline, where the push of a release, and so its `latest` tag, requires it.
 
 Run it locally with `make check` (every toolchain) or `make check-fixtures`.
+
+`node`'s launch lines (`tool.chromium`, `tool.playwright-cli`) start Chromium headless as uid 65532 and load a page through the CLI beside each Harness image. Chromium is Alpine's package of the build, so it moves with each `node` release; the Playwright CLI is pinned in `toolchains/node/packages/package-lock.json`, moved by Renovate.
 
 ## Releases
 
