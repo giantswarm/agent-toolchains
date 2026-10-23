@@ -13,7 +13,8 @@
 # patch; a toolchain's first tag is v0.1.0. Diffing against the toolchain's
 # own last tag, not just the pushed commit, lets a failed or skipped run catch
 # up on the next one. The tag push starts the CircleCI tag pipeline
-# (.circleci/generate-config.sh), which runs the toolchain contract check and
+# (generated .circleci/config.yml), which runs the toolchain contract check
+# (check-image in .circleci/custom.yml) and
 # then publishes the image to gsoci.azurecr.io under its version and `latest`.
 name: Toolchain release
 
