@@ -1,0 +1,13 @@
+#!/bin/sh
+# The Playwright CLI on the node toolchain's Chromium (bin/chromium): headless,
+# Chromium's sandbox off (an actor runs no setuid sandbox), service workers
+# blocked. The environment outranks a repository's own
+# .playwright/cli.config.json. No update check: the CLI is the toolchain's.
+export PLAYWRIGHT_MCP_BROWSER=chromium
+export PLAYWRIGHT_MCP_EXECUTABLE_PATH=/opt/kagent/tools/node/bin/chromium
+export PLAYWRIGHT_MCP_HEADLESS=true
+export PLAYWRIGHT_MCP_SANDBOX=false
+export PLAYWRIGHT_MCP_BLOCK_SERVICE_WORKERS=true
+export NO_UPDATE_NOTIFIER=1
+exec /opt/kagent/tools/node/bin/node \
+  /opt/kagent/tools/node/usr/lib/node_modules/@playwright/cli/playwright-cli.js "$@"
