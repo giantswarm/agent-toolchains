@@ -5,7 +5,7 @@
 # toolchain under toolchains/ and checks it beside each Harness image it
 # declares (harnesses). The images are built locally and never pushed:
 # CircleCI publishes, and runs the same check before a tag moves `latest`
-# (.circleci/generate-config.sh).
+# (check-image in .circleci/custom.yml).
 name: Toolchain contract
 
 on:

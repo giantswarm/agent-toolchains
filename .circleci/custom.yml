@@ -1,0 +1,22 @@
+# Repo-owned CircleCI additions, deep-merged into the generated pipeline
+# (.circleci/config.yml, .circleci/workflows.yml).
+#
+# check-image is the toolchain contract check of one toolchain, the generated
+# release workflow's gate: a <name>/vX.Y.Z tag publishes the image, and moves
+# `latest`, only after the toolchain keeps the contract beside each Harness
+# image it declares (harnesses).
+version: 2.1
+
+jobs:
+  check-image:
+    parameters:
+      image:
+        type: string
+    machine:
+      image: ubuntu-2404:current
+    resource_class: medium
+    steps:
+    - checkout
+    - run:
+        name: Toolchain contract of << parameters.image >>
+        command: scripts/check-toolchains.sh << parameters.image >>

@@ -80,4 +80,4 @@ Run it locally with `make check` (every toolchain) or `make check-fixtures`.
 
 ## Releases
 
-Each merge to `main` tags every changed toolchain `<name>/vX.Y.Z` (`.github/workflows/toolchain-release.yaml`), the bump taken from the squash subject: a breaking change the major, a `feat` the minor, anything else the patch. The tag's CircleCI pipeline runs the contract check, then publishes the multi-arch image to `gsoci.azurecr.io` under its version and `latest`. A pull request that changes a toolchain also publishes an amd64 dev image, which never moves `latest`.
+Each merge to `main` tags every changed toolchain `<name>/vX.Y.Z` (the generated Auto Release, `.github/workflows/zz_generated.auto_release.yaml`), the bump taken from the squash subject: a breaking change the major, a `feat` the minor, anything else the patch. The tag's CircleCI pipeline (devctl-generated) runs the contract check (`check-image` in `.circleci/custom.yml`), then publishes the multi-arch image to `gsoci.azurecr.io` under its version and `latest`. A pull request that changes a toolchain also publishes an amd64 dev image, which never moves `latest`.

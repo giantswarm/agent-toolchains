@@ -3,7 +3,7 @@ set -euo pipefail
 
 # Build each toolchain under toolchains/ for this machine's platform and run
 # the toolchain contract check against it. The image is built locally and
-# never pushed: CircleCI publishes (.circleci/generate-config.sh).
+# never pushed: CircleCI publishes (.circleci/custom.yml).
 #
 # Usage: scripts/check-toolchains.sh [<name>...]   (default: every toolchain)
 
