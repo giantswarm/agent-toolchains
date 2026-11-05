@@ -2,7 +2,7 @@
 # <harness> <image>, the names a toolchain's io.giantswarm.toolchain.harnesses
 # label declares. Each image is the kagent fork line's, digest-pinned;
 # Renovate moves them with each kagent-line release (renovate-custom.json5).
-kagent gsoci.azurecr.io/giantswarm/kagent/golang-adk:1.30.0@sha256:5106fa7a03b119e938340de51fdd640c32a21000e13b94b3610ed3072731002e
-claude gsoci.azurecr.io/giantswarm/kagent/claude-harness:1.30.0@sha256:d21eac087565f3229ea7eaa91f11c7b22c56f634fa43361084a5047da51694fc
-codex gsoci.azurecr.io/giantswarm/kagent/codex-harness:1.30.0@sha256:f7ed80fbd4192f79276969e7e85db680fe319a1ae95a356b361af84a363bf0db
-omp gsoci.azurecr.io/giantswarm/kagent/omp-harness:1.30.0@sha256:849720d29eec3f4d734b8ec6e5c0df465b364ec5f9dd73f55fe77b3cbd69d295
+kagent gsoci.azurecr.io/giantswarm/kagent/golang-adk:1.31.0@sha256:f1da17bf59cffdf672cb6516187c94b43093eba04a078eb47d501eee6fde9ae2
+claude gsoci.azurecr.io/giantswarm/kagent/claude-harness:1.31.0@sha256:4041f2fa26aa2840f60bd9398996d1722968c97dac440bb9446c94366511e3c8
+codex gsoci.azurecr.io/giantswarm/kagent/codex-harness:1.31.0@sha256:a3b2f561f97cad9dcf21401e25d118da6f6b1273347f24cd2ceb5947964dff58
+omp gsoci.azurecr.io/giantswarm/kagent/omp-harness:1.31.0@sha256:06303d6d4ac35f6af4ce3d858e10d48e6d489caa1d6d8a740fd3a09de64e8524
