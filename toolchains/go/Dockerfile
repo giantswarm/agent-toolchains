@@ -8,7 +8,7 @@
 # is cross-compiled, make is Alpine's, every other tool is a pinned release
 # binary (downloads).
 ARG GOLANG=gsoci.azurecr.io/giantswarm/golang:1.27.3-alpine3.24@sha256:f2c872bcee949b7be9c490efd02b48a8a2fbf947cdf533f1c58525ec9d8170fd
-ARG ALPINE=gsoci.azurecr.io/giantswarm/alpine:3.24.3@sha256:b3413572228e34bd1c9245f5565e6cd127005655e8a7899aef33d8e83255c9e6
+ARG ALPINE=gsoci.azurecr.io/giantswarm/alpine:3.24.4@sha256:e2944c2947c8cabdd6b23a2ebcf8094a9f3d53ca9e0340edd065237ab74c18c0
 
 FROM ${GOLANG} AS goroot
 
