@@ -2,7 +2,7 @@
 # each: `good` keeps the toolchain contract, every other target breaks it in
 # one way. Each is jq from Alpine's packages, installed under its prefix with
 # a bin/ wrapper (install-jq.sh).
-ARG ALPINE=docker.io/library/alpine:3.24.3@sha256:be2656061b536c1883c4034790e21d0a09c5aaaf51968b89368a3c0371ea2c9a
+ARG ALPINE=docker.io/library/alpine:3.24.4@sha256:93b41ef40b1677fce8fcc64ff4af09daddfacf5040afde618bc46c1e2d1cc7d4
 
 FROM ${ALPINE} AS build
 COPY install-jq.sh /
