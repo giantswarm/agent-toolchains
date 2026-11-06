@@ -1,6 +1,6 @@
 # The gitlab toolchain: GitLab's CLI `glab`, a pinned release binary
 # (downloads). Apart from `github`, so a Session picks GitHub, GitLab or both.
-ARG ALPINE=gsoci.azurecr.io/giantswarm/alpine:3.24.3@sha256:b3413572228e34bd1c9245f5565e6cd127005655e8a7899aef33d8e83255c9e6
+ARG ALPINE=gsoci.azurecr.io/giantswarm/alpine:3.24.4@sha256:e2944c2947c8cabdd6b23a2ebcf8094a9f3d53ca9e0340edd065237ab74c18c0
 
 FROM --platform=$BUILDPLATFORM ${ALPINE} AS build
 ARG TARGETARCH
