@@ -23,5 +23,12 @@ if [ -z "${ICU_DATA:-}" ]; then
   done
   export ICU_DATA
 fi
+# Only a deny-all caller rule can replace the Muster-specific rules.
+resolver_rules='MAP muster ^NOTFOUND, MAP muster.* ^NOTFOUND'
+for argument do
+  if [ "$argument" = '--host-resolver-rules=MAP * ^NOTFOUND' ]; then
+    resolver_rules='MAP * ^NOTFOUND'
+  fi
+done
 exec "${prefix}/usr/lib/chromium/chromium" "$@" \
-  '--host-resolver-rules=MAP muster ^NOTFOUND, MAP muster.* ^NOTFOUND'
+  "--host-resolver-rules=${resolver_rules}"

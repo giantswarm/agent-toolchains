@@ -23,6 +23,9 @@ failed=0
 for name in "${names[@]}"; do
   dir="${root}/toolchains/${name}"
   image="toolchain-contract/${name}:check"
+  if [[ "$name" == node ]]; then
+    "${root}/scripts/test-chromium-wrapper.sh"
+  fi
   echo "::group::toolchain ${name}"
   docker build -t "$image" -f "${dir}/Dockerfile" "${root}/toolchains"
   declared=$(docker image inspect -f '{{index .Config.Labels "io.giantswarm.toolchain.name"}}' "$image")

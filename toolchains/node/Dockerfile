@@ -56,5 +56,5 @@ LABEL io.giantswarm.toolchain.name="node" \
       io.giantswarm.toolchain.tool.npm="npm --version" \
       io.giantswarm.toolchain.tool.npx="npx --version" \
       io.giantswarm.toolchain.tool.corepack="corepack --version" \
-      io.giantswarm.toolchain.tool.chromium="chromium --version && chromium --headless --no-sandbox --disable-gpu --dump-dom 'data:text/html,<title>ok</title>' | grep -q '<title>ok</title>'" \
+      io.giantswarm.toolchain.tool.chromium="chromium --version && chromium --headless --no-sandbox --disable-gpu --host-resolver-rules='MAP * ^NOTFOUND' --dump-dom 'data:text/html,<title>ok</title>' | grep -q '<title>ok</title>'" \
       io.giantswarm.toolchain.tool.playwright-cli="playwright-cli --version && cd /tmp && playwright-cli open 'data:text/html,<title>ok</title>' >/dev/null && playwright-cli eval document.title | grep -q ok && playwright-cli close >/dev/null"
