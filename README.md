@@ -28,6 +28,10 @@ A **toolchain** is a named set of tools (`go`, `node`) published as its own OCI 
 
 `github` and `gitlab` are separate, so a Session picks GitHub, GitLab or both. Each declares the Harnesses `kagent`, `claude`, `codex` and `omp`.
 
+For local HTML and SVG export, Chromium accepts `--host-resolver-rules=MAP * ^NOTFOUND`
+to refuse every hostname. The wrapper preserves this stricter rule; other caller-supplied
+resolver rules cannot replace the Muster protection.
+
 ## Writing a toolchain
 
 The image root is the mount directory: build everything at `/opt/kagent/tools/<name>` in a build stage, then copy that directory to the root of a `scratch` image. Shebangs and library paths embed the build prefix, so a toolchain is not relocatable.
