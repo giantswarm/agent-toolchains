@@ -7,7 +7,7 @@
 # architecture: Go's own GOROOT is copied from the target's image, goimports
 # is cross-compiled, make is Alpine's, every other tool is a pinned release
 # binary (downloads).
-ARG GOLANG=gsoci.azurecr.io/giantswarm/golang:1.27.3-alpine3.24@sha256:f2c872bcee949b7be9c490efd02b48a8a2fbf947cdf533f1c58525ec9d8170fd
+ARG GOLANG=gsoci.azurecr.io/giantswarm/golang:1.27.4-alpine3.24@sha256:0a5f7fe796599ff487605987432e7619ae45beeb2fba4c2ce0b907879932aebf
 ARG ALPINE=gsoci.azurecr.io/giantswarm/alpine:3.24.4@sha256:e2944c2947c8cabdd6b23a2ebcf8094a9f3d53ca9e0340edd065237ab74c18c0
 
 FROM ${GOLANG} AS goroot
