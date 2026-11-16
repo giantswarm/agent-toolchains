@@ -38,9 +38,9 @@ bin/vendir arm64 821a9da837a017270743597a2e9b796d2d256385ad85450d6c5d89f05dd5aac
 bin/schemalint amd64 7fa193de06fb4ed8dccfcfdf196c3806e118eea2ffe0d04bf97571d15eb7d4fe https://github.com/giantswarm/schemalint/releases/download/v2.6.3/schemalint-linux-amd64
 bin/schemalint arm64 a5abea456ceb65234c3bbbfb27bdcab9bfba06b54ad68e1e84e47cef914c7440 https://github.com/giantswarm/schemalint/releases/download/v2.6.3/schemalint-linux-arm64
 
-# helm-values-schema-json v2.6.0, the binary behind the `helm schema` plugin
-bin/helm-values-schema-json amd64 c3447c1be91b987678e70996451b6cf2169b9f44fea8fe670dc0f340281f11e8 https://github.com/losisin/helm-values-schema-json/releases/download/v2.6.0/helm-values-schema-json_2.6.0_linux_amd64.tgz schema
-bin/helm-values-schema-json arm64 baf7c867fb4cb6903f49e5698b74a850912b6af9c84108668351e312b59e0e4f https://github.com/losisin/helm-values-schema-json/releases/download/v2.6.0/helm-values-schema-json_2.6.0_linux_arm64.tgz schema
+# helm-values-schema-json v2.6.1, the binary behind the `helm schema` plugin
+bin/helm-values-schema-json amd64 939f49d56af083bf7b70cbfbcbebd18b115caedb480c9a5780bf00e1e8cf622e https://github.com/losisin/helm-values-schema-json/releases/download/v2.6.1/helm-values-schema-json_2.6.1_linux_amd64.tgz schema
+bin/helm-values-schema-json arm64 b13334838c53ab60f61af7c05e38f7c97c010011a246272bc5517a6f868eb4ae https://github.com/losisin/helm-values-schema-json/releases/download/v2.6.1/helm-values-schema-json_2.6.1_linux_arm64.tgz schema
 
 # ct (chart-testing) v3.15.0, run by bin/ct with its configuration
 libexec/ct amd64 467561730f25fe09d5e6cd09a3e1f6aa759871c657a57602947c716d9be2c583 https://github.com/helm/chart-testing/releases/download/v3.15.0/chart-testing_3.15.0_linux_amd64.tar.gz ct
