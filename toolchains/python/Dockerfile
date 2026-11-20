@@ -28,7 +28,7 @@ RUN apk-prefix.sh install "$PREFIX" "$TARGETARCH" \
 FROM scratch
 COPY --from=build /opt/kagent/tools/python/ /
 LABEL io.giantswarm.toolchain.name="python" \
-      io.giantswarm.toolchain.harnesses="kagent,claude,codex,omp" \
+      io.giantswarm.toolchain.harnesses="kagent,claude,codex,byo" \
       io.giantswarm.toolchain.egress="https://pypi.org,https://files.pythonhosted.org" \
       io.giantswarm.toolchain.tool.python3="python3 --version && python3 -m venv --without-pip /tmp/venv && /tmp/venv/bin/python -c 'import ssl, sqlite3'" \
       io.giantswarm.toolchain.tool.pre-commit="pre-commit --version" \

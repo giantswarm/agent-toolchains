@@ -16,5 +16,5 @@ RUN fetch.sh "$PREFIX" /tmp/downloads "$TARGETARCH" \
 FROM scratch
 COPY --from=build /opt/kagent/tools/github/ /
 LABEL io.giantswarm.toolchain.name="github" \
-      io.giantswarm.toolchain.harnesses="kagent,claude,codex,omp" \
+      io.giantswarm.toolchain.harnesses="kagent,claude,codex,byo" \
       io.giantswarm.toolchain.tool.gh="/opt/kagent/tools/github/bin/gh --version"
