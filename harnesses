@@ -1,8 +1,9 @@
-# The Harness images a toolchain is checked beside, one per Harness:
-# <harness> <image>, the names a toolchain's io.giantswarm.toolchain.harnesses
+# The runtime images a toolchain is checked beside, one per runtime:
+# <runtime> <image>, the names a toolchain's io.giantswarm.toolchain.harnesses
 # label declares. Each image is the kagent fork line's, digest-pinned;
 # Renovate moves them with each kagent-line release (renovate-custom.json5).
+# The BYO runtime is checked with OMP's image.
 kagent gsoci.azurecr.io/giantswarm/kagent/golang-adk:1.31.1@sha256:60a09dba19b52bb00ce109a46b51c8ef675a15d2bf14f4330756d38a25ed931a
 claude gsoci.azurecr.io/giantswarm/kagent/claude-harness:1.31.1@sha256:799fad666e1b92b399255be42bfee7bbec63b07a29f586dd5f86c35d577c6e75
 codex gsoci.azurecr.io/giantswarm/kagent/codex-harness:1.31.1@sha256:b8d02592acc3d48e7e9834781eaa3017da5f3a0744ac24ab58450f83a85ab68f
-omp gsoci.azurecr.io/giantswarm/kagent/omp-harness:1.31.1@sha256:96ebe9cbc19d8dded9c858a7a223bb734bad1d98b679824a9fd87b7bf4e488ad
+byo gsoci.azurecr.io/giantswarm/kagent/omp-harness:1.31.1@sha256:96ebe9cbc19d8dded9c858a7a223bb734bad1d98b679824a9fd87b7bf4e488ad
