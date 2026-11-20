@@ -16,5 +16,5 @@ RUN fetch.sh "$PREFIX" /tmp/downloads "$TARGETARCH" \
 FROM scratch
 COPY --from=build /opt/kagent/tools/gitlab/ /
 LABEL io.giantswarm.toolchain.name="gitlab" \
-      io.giantswarm.toolchain.harnesses="kagent,claude,codex,omp" \
+      io.giantswarm.toolchain.harnesses="kagent,claude,codex,byo" \
       io.giantswarm.toolchain.tool.glab="/opt/kagent/tools/gitlab/bin/glab --version"

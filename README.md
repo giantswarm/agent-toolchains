@@ -26,7 +26,7 @@ A **toolchain** is a named set of tools (`go`, `node`) published as its own OCI 
 | `github` | `gh` |
 | `gitlab` | `glab` |
 
-`github` and `gitlab` are separate, so a Session picks GitHub, GitLab or both. Each declares the Harnesses `kagent`, `claude`, `codex` and `omp`.
+`github` and `gitlab` are separate, so a Session picks GitHub, GitLab or both. Each declares the Harness runtime kinds `kagent`, `claude`, `codex` and `byo`. OMP runs on the `byo` runtime and is its contract-check image.
 
 For local HTML and SVG export, Chromium accepts `--host-resolver-rules=MAP * ^NOTFOUND`
 to refuse every hostname. The wrapper preserves this stricter rule; other caller-supplied
@@ -47,7 +47,7 @@ RUN mkdir -p /opt/kagent/tools/jq \
 FROM scratch
 COPY --from=build /opt/kagent/tools/jq/ /
 LABEL io.giantswarm.toolchain.name="jq" \
-      io.giantswarm.toolchain.harnesses="kagent,claude,codex,omp" \
+      io.giantswarm.toolchain.harnesses="kagent,claude,codex,byo" \
       io.giantswarm.toolchain.tool.jq="jq --version"
 ```
 
