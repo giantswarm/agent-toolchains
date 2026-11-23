@@ -25,26 +25,26 @@ RUN rm /opt/kagent/tools/jq/usr/lib/libonig.so.*
 FROM scratch AS good
 COPY --from=build /opt/kagent/tools/jq/ /
 LABEL io.giantswarm.toolchain.name="jq" \
-      io.giantswarm.toolchain.harnesses="kagent,claude,codex,omp" \
+      io.giantswarm.toolchain.harnesses="kagent,claude,codex,byo" \
       io.giantswarm.toolchain.egress="https://example.com,https://registry.example.com:8443" \
       io.giantswarm.toolchain.tool.jq="jq --version"
 
 FROM scratch AS wrong-prefix
 COPY --from=build-elsewhere /opt/kagent/tools/elsewhere/ /
 LABEL io.giantswarm.toolchain.name="jq" \
-      io.giantswarm.toolchain.harnesses="kagent,claude,codex,omp" \
+      io.giantswarm.toolchain.harnesses="kagent,claude,codex,byo" \
       io.giantswarm.toolchain.tool.jq="jq --version"
 
 FROM scratch AS missing-lib
 COPY --from=build-missing-lib /opt/kagent/tools/jq/ /
 LABEL io.giantswarm.toolchain.name="jq" \
-      io.giantswarm.toolchain.harnesses="kagent,claude,codex,omp" \
+      io.giantswarm.toolchain.harnesses="kagent,claude,codex,byo" \
       io.giantswarm.toolchain.tool.jq="jq --version"
 
 FROM scratch AS unreadable
 COPY --from=build-unreadable /opt/kagent/tools/jq/ /
 LABEL io.giantswarm.toolchain.name="jq" \
-      io.giantswarm.toolchain.harnesses="kagent,claude,codex,omp" \
+      io.giantswarm.toolchain.harnesses="kagent,claude,codex,byo" \
       io.giantswarm.toolchain.tool.jq="jq --version"
 
 FROM good AS user
