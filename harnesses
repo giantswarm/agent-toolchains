@@ -3,7 +3,7 @@
 # label declares. Each image is the kagent fork line's, digest-pinned;
 # Renovate moves them with each kagent-line release (renovate-custom.json5).
 # The BYO runtime is checked with OMP's image.
-kagent gsoci.azurecr.io/giantswarm/kagent/golang-adk:1.33.0@sha256:b043c20be30b05f210551b2767f3e02ffe69837d825ba9cc33c924ee0d1acb54
-claude gsoci.azurecr.io/giantswarm/kagent/claude-harness:1.33.0@sha256:0bc1bd7b628be2d31cc8ff08683e5a68c16c441787cd176517f9a0451dde3a1f
-codex gsoci.azurecr.io/giantswarm/kagent/codex-harness:1.33.0@sha256:54dea47117dfc8e880150314af45521dadb8de72a9756e4a59e4b4cca418957a
-byo gsoci.azurecr.io/giantswarm/kagent/omp-harness:1.33.0@sha256:c12011328b5f37250481f485e75552b0638b1400b7483439a7a252fdb20ac683
+kagent gsoci.azurecr.io/giantswarm/kagent/golang-adk:1.33.2@sha256:bcd1204ec79c9052beae12edec5fa877a62c94de91e53cef2d0c86588451156d
+claude gsoci.azurecr.io/giantswarm/kagent/claude-harness:1.33.2@sha256:51b143b04fad5a6abc68f1fa1bad2ae94da34ccd6d1189130ab89f90e33aa728
+codex gsoci.azurecr.io/giantswarm/kagent/codex-harness:1.33.2@sha256:2518029a1d01c761746c07c6269c386aabd5d426512615d128396ebbb85f0bc3
+byo gsoci.azurecr.io/giantswarm/kagent/omp-harness:1.33.2@sha256:a9c66d97b42a48f4b1e6c511fd1b73ec4c25b46958a051863531dd8b3c3e0adc
