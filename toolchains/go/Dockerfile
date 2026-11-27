@@ -1,7 +1,8 @@
 # The go toolchain: Go and what a repository made from the giantswarm
 # templates (template, mcp-template, template-app) runs locally. No kubectl
 # (an agent reaches clusters through mcp-kubernetes), no kind (an actor has no
-# container runtime) and no devctl (served by its MCP server).
+# container runtime) and no devctl (served by its MCP server). No yq: the
+# app templates' make targets run it from the data toolchain, mounted beside.
 #
 # Built at /opt/kagent/tools/go on the build platform for each target
 # architecture: Go's own GOROOT is copied from the target's image, goimports
