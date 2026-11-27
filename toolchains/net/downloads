@@ -1,0 +1,7 @@
+# The net toolchain's pinned downloads (toolchains/lib/fetch.sh):
+# <dest> <arch> <sha256> <url> [<member>]
+# A version changes with both architectures' digests.
+
+# grpcurl v1.9.4, upstream's static build: Alpine packages no grpcurl
+usr/bin/grpcurl amd64 97e13d58d2733a0e62cd2571d1d5f0c02823f0d25282f08bddedf1ad9c5d1736 https://github.com/fullstorydev/grpcurl/releases/download/v1.9.4/grpcurl_1.9.4_linux_x86_64.tar.gz grpcurl
+usr/bin/grpcurl arm64 ad66227d90631da5428b4a5ccf28d63846f0f15649d8b2367df044a59edbb617 https://github.com/fullstorydev/grpcurl/releases/download/v1.9.4/grpcurl_1.9.4_linux_arm64.tar.gz grpcurl

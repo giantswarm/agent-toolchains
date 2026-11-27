@@ -24,6 +24,7 @@ A **toolchain** is a named set of tools (`go`, `node`) published as its own OCI 
 | `node` | Node, npm, npx, corepack, and a headless browser: Alpine's Chromium (`chromium`) and the Playwright CLI (`playwright-cli`). `bin/playwright-cli` configures the CLI (the toolchain's Chromium, headless, Chromium's sandbox off, service workers blocked; its environment outranks a repository's `.playwright/cli.config.json`), and `bin/chromium` refuses every name of muster's in-cluster host, a defence in depth while Chromium resolves names itself. The `playwright-browser` skill of giantswarm/agent-skills teaches an agent to use it |
 | `python` | python3, pre-commit, pytest, yamllint, yamale, shellcheck: the templates' pre-commit hooks, the app ATS tests and ct's lint; mounted beside `go` or `node` |
 | `data` | jq, yq (mikefarah's), miller (`mlr`), sqlite3, gron, jo, xmlstarlet: query, reshape and convert JSON, YAML, CSV and XML in a shell pipeline; mounted beside any other toolchain |
+| `net` | curl, dig, host, nslookup, openssl, nc (OpenBSD's), grpcurl, websocat: call HTTP, gRPC and WebSocket services and find out where a connection fails (DNS, TCP or TLS). Every Harness image's busybox `nslookup` and `nc`, and the claude Harness's `curl`, come first on PATH: the toolchain's are at `/opt/kagent/tools/net/bin/`. Its Alpine-built tools read the Harness image's CA bundle at Alpine's paths (`/etc/ssl`), as every Harness image in `harnesses` has it. No tcpdump: it needs raw sockets |
 | `github` | `gh` |
 | `gitlab` | `glab` |
 
