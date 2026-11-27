@@ -20,9 +20,10 @@ A **toolchain** is a named set of tools (`go`, `node`) published as its own OCI 
 
 | Toolchain | Tools |
 |---|---|
-| `go` | Go (with `gofmt`, `go vet`), make, golangci-lint (the version giantswarm/architect lints with), goimports, nancy, gitsemver, architect, helm, helm-docs, yq, vendir, schemalint, helm-values-schema-json, ct: what a repository made from the giantswarm templates runs locally. No kubectl (agents reach clusters through mcp-kubernetes), no kind (an actor has no container runtime), no devctl (served by its MCP server) |
+| `go` | Go (with `gofmt`, `go vet`), make, golangci-lint (the version giantswarm/architect lints with), goimports, nancy, gitsemver, architect, helm, helm-docs, vendir, schemalint, helm-values-schema-json, ct: what a repository made from the giantswarm templates runs locally. No kubectl (agents reach clusters through mcp-kubernetes), no kind (an actor has no container runtime), no devctl (served by its MCP server). The app templates' make targets also run yq: mount `data` beside it |
 | `node` | Node, npm, npx, corepack, and a headless browser: Alpine's Chromium (`chromium`) and the Playwright CLI (`playwright-cli`). `bin/playwright-cli` configures the CLI (the toolchain's Chromium, headless, Chromium's sandbox off, service workers blocked; its environment outranks a repository's `.playwright/cli.config.json`), and `bin/chromium` refuses every name of muster's in-cluster host, a defence in depth while Chromium resolves names itself. The `playwright-browser` skill of giantswarm/agent-skills teaches an agent to use it |
 | `python` | python3, pre-commit, pytest, yamllint, yamale, shellcheck: the templates' pre-commit hooks, the app ATS tests and ct's lint; mounted beside `go` or `node` |
+| `data` | jq, yq (mikefarah's), miller (`mlr`), sqlite3, gron, jo, xmlstarlet: query, reshape and convert JSON, YAML, CSV and XML in a shell pipeline; mounted beside any other toolchain |
 | `github` | `gh` |
 | `gitlab` | `glab` |
 

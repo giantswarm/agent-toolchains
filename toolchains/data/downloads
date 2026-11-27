@@ -1,0 +1,7 @@
+# The data toolchain's pinned downloads (toolchains/lib/fetch.sh):
+# <dest> <arch> <sha256> <url> [<member>]
+# A version changes with both architectures' digests.
+
+# yq v4.54.1 (mikefarah's), upstream's static build: newer than Alpine's yq-go
+usr/bin/yq amd64 8e34fc298390875de416e6a4afcb8cabeceb25d9aa8506c1a2f9353cf702ea5f https://github.com/mikefarah/yq/releases/download/v4.54.1/yq_linux_amd64
+usr/bin/yq arm64 189088da0c6429ec5178dfaab1a114805f6cab0b61b165ab236efedf1d57a71b https://github.com/mikefarah/yq/releases/download/v4.54.1/yq_linux_arm64

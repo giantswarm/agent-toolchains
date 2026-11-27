@@ -56,7 +56,6 @@ LABEL io.giantswarm.toolchain.name="go" \
       io.giantswarm.toolchain.tool.architect="architect version" \
       io.giantswarm.toolchain.tool.helm="helm version --short" \
       io.giantswarm.toolchain.tool.helm-docs="helm-docs --version" \
-      io.giantswarm.toolchain.tool.yq="yq --version" \
       io.giantswarm.toolchain.tool.vendir="vendir version" \
       io.giantswarm.toolchain.tool.schemalint="schemalint --version" \
       io.giantswarm.toolchain.tool.helm-values-schema-json="helm-values-schema-json --version" \
