@@ -26,10 +26,6 @@ bin/helm arm64 4c29e286b279d170fa048ddfc3e4e83dcd069ca9c52102766ba672d7149e694d 
 bin/helm-docs amd64 a8cf72ada34fad93285ba2a452b38bdc5bd52cc9a571236244ec31022928d6cc https://github.com/norwoodj/helm-docs/releases/download/v1.14.2/helm-docs_1.14.2_Linux_x86_64.tar.gz helm-docs
 bin/helm-docs arm64 c3787212332386dcd122debef7848feb165aa701467ae3e3442df7638f3ac4e4 https://github.com/norwoodj/helm-docs/releases/download/v1.14.2/helm-docs_1.14.2_Linux_arm64.tar.gz helm-docs
 
-# yq v4.54.1
-bin/yq amd64 8e34fc298390875de416e6a4afcb8cabeceb25d9aa8506c1a2f9353cf702ea5f https://github.com/mikefarah/yq/releases/download/v4.54.1/yq_linux_amd64
-bin/yq arm64 189088da0c6429ec5178dfaab1a114805f6cab0b61b165ab236efedf1d57a71b https://github.com/mikefarah/yq/releases/download/v4.54.1/yq_linux_arm64
-
 # vendir v0.46.3
 bin/vendir amd64 5af8823ecc67b3ce2359bb0b70e72a5dbd765135722ca0ff42c16bc4d7409847 https://github.com/carvel-dev/vendir/releases/download/v0.46.3/vendir-linux-amd64
 bin/vendir arm64 821a9da837a017270743597a2e9b796d2d256385ad85450d6c5d89f05dd5aac9 https://github.com/carvel-dev/vendir/releases/download/v0.46.3/vendir-linux-arm64
